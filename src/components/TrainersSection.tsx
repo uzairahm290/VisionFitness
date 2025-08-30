@@ -1,18 +1,15 @@
 
 
 import { useEffect, useRef } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { 
-  Instagram, 
-  Twitter, 
-  Linkedin, 
   Star,
-  Calendar,
-  Clock,
-  Award
+  Award,
+  Share2,
+  Twitter,
+  Linkedin
 } from "lucide-react"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
@@ -188,7 +185,7 @@ export default function TrainersSection() {
                 {/* Social Links */}
                 <div className="flex space-x-3">
                   <Button size="icon" variant="ghost" className="h-10 w-10">
-                    <Instagram className="h-5 w-5" />
+                    <Share2 className="h-5 w-5" />
                   </Button>
                   <Button size="icon" variant="ghost" className="h-10 w-10">
                     <Twitter className="h-5 w-5" />

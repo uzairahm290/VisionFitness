@@ -1,7 +1,7 @@
 
 import { useEffect, useRef } from "react"
 import { Button } from "@/components/ui/button"
-import { Play, ArrowRight, Star } from "lucide-react"
+import { ArrowRight, Star } from "lucide-react"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 

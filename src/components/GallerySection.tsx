@@ -4,7 +4,7 @@ import { useState } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Heart, Share2, Eye } from "lucide-react"
+import { Heart, Share2 } from "lucide-react"
 
 export default function GallerySection() {
   const [activeFilter, setActiveFilter] = useState("all")
