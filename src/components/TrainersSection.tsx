@@ -24,20 +24,20 @@ export default function TrainersSection() {
   const ctaRef = useRef<HTMLDivElement>(null)
 
   const trainer = {
-    id: 1,
+      id: 1,
     name: "Fahad",
     role: "Owner & Head Trainer",
     specialties: ["CrossFit Training", "Personal Training", "Strength Training"],
-    experience: "10+ years",
+      experience: "10+ years",
     image: "/images/trainer.jpg",
     bio: "Fahad is the passionate owner and head trainer at Vision Fitness. Known for his humble nature and exceptional training expertise, he has helped hundreds of clients achieve their fitness goals. His dedication to creating a family-like atmosphere makes Vision Fitness more than just a gym - it's a community.",
-    social: {
-      instagram: "#",
-      twitter: "#",
-      linkedin: "#"
-    },
+      social: {
+        instagram: "#",
+        twitter: "#",
+        linkedin: "#"
+      },
     achievements: ["CrossFit Certified", "Personal Training Expert", "500+ Happy Clients", "Gym Owner"]
-  }
+    }
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -103,7 +103,7 @@ export default function TrainersSection() {
   }, [])
 
   return (
-    <section ref={sectionRef} id="trainers" className="py-10 bg-gradient-to-br from-background via-background to-muted/20">
+    <section ref={sectionRef} id="trainers" className="py-5 bg-gradient-to-br from-background via-background to-muted/20">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div ref={headerRef} className="text-center space-y-4 mb-16">
@@ -137,7 +137,7 @@ export default function TrainersSection() {
                 <div className="mb-6">
                   <h3 className="text-3xl font-bold mb-2">
                     <span className="text-foreground">{trainer.name}</span>
-                  </h3>
+                </h3>
                   <p className="text-xl text-primary font-semibold mb-2">
                     {trainer.role}
                   </p>
@@ -194,7 +194,7 @@ export default function TrainersSection() {
                     <Linkedin className="h-5 w-5" />
                   </Button>
                 </div>
-              </div>
+        </div>
             </div>
           </Card>
         </div>

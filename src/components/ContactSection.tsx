@@ -17,7 +17,8 @@ import {
   MessageSquare,
   User,
   Calendar,
-  Star
+  Star,
+  MessageCircle
 } from "lucide-react"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
@@ -79,21 +80,21 @@ export default function ContactSection() {
   const membershipPlans = [
     {
       name: "Basic",
-      price: "$29",
+      price: "RS. 3000",
       period: "/month",
       features: ["Access to gym equipment", "Locker room access", "Free parking"],
       popular: false
     },
     {
       name: "Premium",
-      price: "$49",
+      price: "RS. 5000",
       period: "/month",
       features: ["All Basic features", "Group classes", "Personal trainer consultation", "Towel service"],
       popular: true
     },
     {
       name: "Elite",
-      price: "$79",
+      price: "RS. 7000",
       period: "/month",
       features: ["All Premium features", "Unlimited personal training", "Nutrition consultation", "Spa access"],
       popular: false
@@ -169,16 +170,33 @@ export default function ContactSection() {
             scale: 1,
             duration: 0.7,
             ease: "power2.out",
-            delay: index * 0.15,
+            delay: index * 0.2,
             scrollTrigger: {
-              trigger: card,
-              start: "top 85%",
-              end: "bottom 15%",
+              trigger: plansRef.current,
+              start: "top 80%",
+              end: "bottom 20%",
               toggleActions: "play none none reverse"
             }
           }
         )
       })
+
+      // Plans section animation
+      gsap.fromTo(plansRef.current,
+        { y: 30, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: plansRef.current,
+            start: "top 80%",
+            end: "bottom 20%",
+            toggleActions: "play none none reverse"
+          }
+        }
+      )
 
       // Map section animation
       gsap.fromTo(mapRef.current,
@@ -242,9 +260,32 @@ export default function ContactSection() {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 xl:gap-16">
+        {/* Contact Info Cards - Top Section */}
+        <div ref={contactInfoRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
+          {contactInfo.map((info, index) => (
+            <Card 
+              key={index} 
+              className={`hover:shadow-lg transition-all duration-300 hover:-translate-y-1 contact-card ${
+                info.title === "Visit Us" ? "cursor-pointer" : ""
+              }`}
+              onClick={info.title === "Visit Us" ? () => window.open('https://maps.app.goo.gl/F8oFxq1rKoNi9HwJ9', '_blank') : undefined}
+            >
+              <CardContent className="p-6 text-center">
+                <div className={`w-12 h-12 rounded-full ${info.color} flex items-center justify-center mx-auto mb-4`}>
+                  <info.icon className="h-6 w-6" />
+                </div>
+                <h3 className="font-semibold text-lg mb-2">{info.title}</h3>
+                <p className="text-primary font-medium mb-1">{info.details}</p>
+                <p className="text-sm text-muted-foreground">{info.description}</p>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+
+                {/* First Line: Contact Form + Quick Contact */}
+        <div className="grid lg:grid-cols-2 gap-12 xl:gap-16 mb-16">
           {/* Contact Form */}
-          <div ref={formRef} className="space-y-8">
+          <div ref={formRef}>
             <Card className="shadow-xl border-0 bg-gradient-to-br from-background to-muted/30">
               <CardHeader className="pb-6">
                 <CardTitle className="flex items-center space-x-2 text-2xl">
@@ -375,74 +416,93 @@ export default function ContactSection() {
             </Card>
           </div>
 
-          {/* Contact Information */}
-          <div className="space-y-6 lg:space-y-8">
-            {/* Contact Info Cards */}
-            <div ref={contactInfoRef} className="space-y-3 lg:space-y-4">
-              {contactInfo.map((info, index) => (
-                <Card 
-                  key={index} 
-                  className={`hover:shadow-lg transition-all duration-300 hover:-translate-y-1 contact-card ${
-                    info.title === "Visit Us" ? "cursor-pointer" : ""
-                  }`}
-                  onClick={info.title === "Visit Us" ? () => window.open('https://maps.app.goo.gl/F8oFxq1rKoNi9HwJ9', '_blank') : undefined}
-                >
-                  <CardContent className="p-4 lg:p-6">
-                    <div className="flex items-start space-x-3 lg:space-x-4">
-                      <div className={`p-2 lg:p-3 rounded-lg ${info.color}`}>
-                        <info.icon className="h-5 w-5 lg:h-6 lg:w-6" />
-                      </div>
-                      <div>
-                        <h3 className="font-semibold text-base lg:text-lg mb-1">{info.title}</h3>
-                        <p className="text-primary font-medium mb-1 text-sm lg:text-base">{info.details}</p>
-                        <p className="text-xs lg:text-sm text-muted-foreground">{info.description}</p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-
-            {/* Membership Plans */}
+          {/* Quick Contact */}
+          <div>
             <Card className="shadow-lg">
-              <CardHeader className="pb-4">
+              <CardHeader>
                 <CardTitle className="flex items-center space-x-2">
-                  <Star className="h-5 w-5 text-primary" />
-                  <span>Membership Plans</span>
+                  <Phone className="h-5 w-5 text-primary" />
+                  <span>Quick Contact</span>
                 </CardTitle>
               </CardHeader>
-              <CardContent>
-                <div ref={plansRef} className="space-y-3">
-                  {membershipPlans.map((plan, index) => (
-                    <div key={index} className="flex items-center justify-between p-4 border rounded-lg hover:bg-muted/50 transition-colors plan-card">
-                      <div className="flex items-center space-x-3">
-                        {plan.popular && (
-                          <Badge className="bg-primary text-primary-foreground">Most Popular</Badge>
-                        )}
-                        <div>
-                          <h4 className="font-semibold">{plan.name}</h4>
-                          <div className="flex items-baseline space-x-1">
-                            <span className="text-2xl font-bold text-primary">{plan.price}</span>
-                            <span className="text-muted-foreground">{plan.period}</span>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="text-right">
-                        <ul className="text-sm text-muted-foreground space-y-1">
-                          {plan.features.slice(0, 2).map((feature, featureIndex) => (
-                            <li key={featureIndex}>{feature}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-                  ))}
+              <CardContent className="space-y-4">
+                <div className="flex items-center space-x-3 p-4 bg-muted/30 rounded-lg">
+                  <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
+                    <Phone className="h-5 w-5 text-primary" />
+                  </div>
+                  <div>
+                    <p className="font-medium">Call us now</p>
+                    <p className="text-primary font-semibold">0332-5010579</p>
+                  </div>
                 </div>
-                <Button className="w-full mt-4" variant="outline">
-                  View All Plans
+                <div className="flex items-center space-x-3 p-4 bg-muted/30 rounded-lg">
+                  <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
+                    <Mail className="h-5 w-5 text-primary" />
+                  </div>
+                  <div>
+                    <p className="font-medium">Email us</p>
+                    <p className="text-primary font-semibold">info@visionfitness.com</p>
+                  </div>
+                </div>
+                <div className="flex items-center space-x-3 p-4 bg-muted/30 rounded-lg">
+                  <div className="w-10 h-10 bg-green-500/10 rounded-full flex items-center justify-center">
+                    <MessageCircle className="h-5 w-5 text-green-600" />
+                  </div>
+                  <div>
+                    <p className="font-medium">WhatsApp us</p>
+                    <p className="text-green-600 font-semibold">0332-5010579</p>
+                  </div>
+                </div>
+                <Button 
+                  className="w-full bg-green-600 hover:bg-green-700 text-white" 
+                  onClick={() => window.open('https://wa.me/923325010579?text=Hi! I\'m interested in Vision Fitness membership. Can you provide more information?', '_blank')}
+                >
+                  <MessageCircle className="h-4 w-4 mr-2" />
+                  Contact on WhatsApp
                 </Button>
               </CardContent>
             </Card>
           </div>
+        </div>
+
+        {/* Second Line: Membership Plans */}
+        <div ref={plansRef} className="mb-16">
+          <Card className="shadow-lg">
+            <CardHeader>
+              <CardTitle className="flex items-center space-x-2">
+                <Star className="h-5 w-5 text-primary" />
+                <span>Popular Plans</span>
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div ref={plansRef} className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                                  {membershipPlans.map((plan, index) => (
+                    <div key={index} className="p-4 border rounded-lg hover:bg-muted/50 transition-colors plan-card text-center relative">
+                      {plan.popular && (
+                        <div className="absolute -top-2 left-1/2 transform -translate-x-1/2">
+                          <Badge className="bg-primary text-primary-foreground text-xs">Popular</Badge>
+                        </div>
+                      )}
+                      <div className="mb-3">
+                        <h4 className="font-semibold mb-2">{plan.name}</h4>
+                      </div>
+                      <div className="flex items-baseline justify-center space-x-1 mb-4">
+                        <span className="text-2xl font-bold text-primary">{plan.price}</span>
+                        <span className="text-muted-foreground">{plan.period}</span>
+                      </div>
+                      <ul className="text-sm text-muted-foreground space-y-2">
+                        {plan.features.slice(0, 3).map((feature, featureIndex) => (
+                          <li key={featureIndex} className="flex items-start space-x-2">
+                            <div className="w-1.5 h-1.5 bg-primary rounded-full mt-1.5 flex-shrink-0"></div>
+                            <span className="text-xs leading-relaxed">{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+              </div>
+            </CardContent>
+          </Card>
         </div>
 
         {/* Map Section */}
@@ -492,9 +552,10 @@ export default function ContactSection() {
                       <span>Getting Here</span>
                     </h4>
                     <div className="space-y-2 text-muted-foreground">
-                      <p>• Subway: Fulton Street Station</p>
-                      <p>• Bus: M15, M22, M103</p>
-                      <p>• Parking available nearby</p>
+                      <p>• Metro Bus: Johar Town Station</p>
+                      <p>• Local Bus: Routes 1, 3, 5</p>
+                      <p>• Free parking available</p>
+                      <p>• Easy access from Main Boulevard</p>
                     </div>
                   </div>
                 </div>

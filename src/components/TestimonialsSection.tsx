@@ -1,14 +1,53 @@
 
 
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 import { Star, Quote } from "lucide-react"
+import { gsap } from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
+
+gsap.registerPlugin(ScrollTrigger)
 
 export default function TestimonialsSection() {
   const [isPaused, setIsPaused] = useState(false)
   const scrollRef = useRef<HTMLDivElement>(null)
+  const statsRef = useRef<HTMLDivElement>(null)
+  
+  // Animated counters state
+  const [counts, setCounts] = useState({
+    satisfaction: 0,
+    rating: 0,
+    members: 0,
+    stories: 0
+  })
+
+  // Animation values
+  const targetValues = {
+    satisfaction: 98,
+    rating: 4.7,
+    members: 500,
+    stories: 1000
+  }
+
+  // Animate counters when component mounts
+  useEffect(() => {
+    const duration = 1000 // 2 seconds
+    const steps = 60
+    const stepDuration = duration / steps
+    
+    const timer = setInterval(() => {
+      setCounts(prev => ({
+        satisfaction: Math.min(prev.satisfaction + (targetValues.satisfaction / steps), targetValues.satisfaction),
+        rating: Math.min(prev.rating + (targetValues.rating / steps), targetValues.rating),
+        members: Math.min(prev.members + (targetValues.members / steps), targetValues.members),
+        stories: Math.min(prev.stories + (targetValues.stories / steps), targetValues.stories)
+      }))
+    }, stepDuration)
+    
+    return () => clearInterval(timer)
+  }, [])
 
   const testimonials = [
     {
@@ -156,38 +195,38 @@ export default function TestimonialsSection() {
             {duplicatedTestimonials.map((testimonial, index) => (
               <div 
                 key={`${testimonial.id}-${index}`}
-                className="flex-shrink-0 w-64 sm:w-72 md:w-80 lg:w-96 xl:w-[400px] p-3 sm:p-4"
+                className="flex-shrink-0 w-80 sm:w-72 md:w-80 lg:w-96 xl:w-[400px] p-2 sm:p-3 md:p-4"
               >
                 <Card className="h-full group hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-                  <CardHeader className="pb-4">
-                    <div className="flex items-start justify-between mb-4">
-                      <div className="flex items-center space-x-3">
-                        <Avatar className="w-12 h-12">
+                  <CardHeader className="pb-3 sm:pb-4 px-3 sm:px-4">
+                    <div className="flex items-start justify-between mb-3 sm:mb-4">
+                      <div className="flex items-center space-x-2 sm:space-x-3">
+                        <Avatar className="w-10 h-10 sm:w-12 sm:h-12">
                           <AvatarImage src={testimonial.image} alt={testimonial.name} />
-                          <AvatarFallback className="text-sm font-semibold">
+                          <AvatarFallback className="text-xs sm:text-sm font-semibold">
                             {testimonial.name.split(' ').map(n => n[0]).join('')}
                           </AvatarFallback>
                         </Avatar>
-                        <div>
-                          <h3 className="font-semibold text-lg">{testimonial.name}</h3>
-                          <p className="text-sm text-muted-foreground">{testimonial.role}</p>
+                        <div className="min-w-0 flex-1">
+                          <h3 className="font-semibold text-base sm:text-lg truncate">{testimonial.name}</h3>
+                          <p className="text-xs sm:text-sm text-muted-foreground truncate">{testimonial.role}</p>
                         </div>
                       </div>
-                      <Quote className="h-6 w-6 text-primary/30 group-hover:text-primary transition-colors" />
+                      <Quote className="h-5 w-5 sm:h-6 sm:w-6 text-primary/30 group-hover:text-primary transition-colors flex-shrink-0" />
                     </div>
                     
-                    <div className="flex items-center space-x-2 mb-3">
+                    <div className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-2">
                       <div className="flex space-x-1">
                         {renderStars(testimonial.rating)}
                       </div>
-                      <Badge variant="secondary" className="text-xs">
+                      <Badge variant="secondary" className="text-xs w-fit">
                         {testimonial.category}
                       </Badge>
                     </div>
                   </CardHeader>
                   
-                  <CardContent className="space-y-4">
-                    <blockquote className="text-muted-foreground italic text-sm leading-relaxed">
+                  <CardContent className="px-3 sm:px-4 pb-3 sm:pb-4">
+                    <blockquote className="text-muted-foreground italic text-xs sm:text-sm leading-relaxed line-clamp-4 sm:line-clamp-none">
                       "{testimonial.testimonial}"
                     </blockquote>
                   </CardContent>
@@ -198,21 +237,29 @@ export default function TestimonialsSection() {
         </div>
 
         {/* Stats Section */}
-        <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div ref={statsRef} className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8">
           <div className="text-center">
-            <div className="text-3xl font-bold text-primary mb-2">98%</div>
+            <div className="text-3xl font-bold text-primary mb-2">
+              {Math.round(counts.satisfaction)}%
+            </div>
             <div className="text-sm text-muted-foreground">Member Satisfaction</div>
           </div>
           <div className="text-center">
-            <div className="text-3xl font-bold text-primary mb-2">4.7/5</div>
+            <div className="text-3xl font-bold text-primary mb-2">
+              {counts.rating.toFixed(1)}/5
+            </div>
             <div className="text-sm text-muted-foreground">Average Rating</div>
           </div>
           <div className="text-center">
-            <div className="text-3xl font-bold text-primary mb-2">500+</div>
+            <div className="text-3xl font-bold text-primary mb-2">
+              {Math.round(counts.members)}+
+            </div>
             <div className="text-sm text-muted-foreground">Happy Members</div>
           </div>
           <div className="text-center">
-            <div className="text-3xl font-bold text-primary mb-2">1000+</div>
+            <div className="text-3xl font-bold text-primary mb-2">
+              {Math.round(counts.stories)}+
+            </div>
             <div className="text-sm text-muted-foreground">Success Stories</div>
           </div>
         </div>
