@@ -109,7 +109,11 @@ export default function GallerySection() {
                 <img 
                   src={item.image} 
                   alt={item.title} 
+<<<<<<< HEAD
                   className="w-full h-full object-cover transition-all duration-500 filter saturate-60 group-hover:saturate-100"
+=======
+                  className="w-full h-full object-cover transition-all duration-500 filter saturate-30 group-hover:saturate-100 sm:saturate-100"
+>>>>>>> 3d860aee2ae8a17909527b4184589ec76963f1ed
                 />
                 
                 {/* Overlay */}
