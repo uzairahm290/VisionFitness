@@ -2,7 +2,6 @@
 
 import { useEffect, useRef } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
 import { 
   Dumbbell, 
   Heart, 
@@ -10,7 +9,6 @@ import {
   Target, 
   Clock, 
   Award,
-  ArrowRight 
 } from "lucide-react"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
