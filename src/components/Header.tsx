@@ -57,7 +57,19 @@ export default function Header() {
           {/* Right side - Theme toggle and CTA */}
           <div className="flex items-center space-x-4">
             <ThemeToggle />
-            <Button className="hidden sm:inline-flex">
+            <Button 
+              className="hidden sm:inline-flex"
+              onClick={() => {
+                // Scroll to contact section for membership/joining
+                const contactSection = document.getElementById('contact');
+                if (contactSection) {
+                  contactSection.scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                  });
+                }
+              }}
+            >
               Join Now
             </Button>
 
@@ -92,7 +104,21 @@ export default function Header() {
                 </a>
               ))}
               <div className="px-3 py-2">
-                <Button className="w-full">
+                <Button 
+                  className="w-full"
+                  onClick={() => {
+                    // Scroll to contact section for membership/joining
+                    const contactSection = document.getElementById('contact');
+                    if (contactSection) {
+                      contactSection.scrollIntoView({ 
+                        behavior: 'smooth',
+                        block: 'start'
+                      });
+                    }
+                    // Close mobile menu
+                    setIsMobileMenuOpen(false);
+                  }}
+                >
                   Join Now
                 </Button>
               </div>

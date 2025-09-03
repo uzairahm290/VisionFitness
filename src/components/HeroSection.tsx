@@ -111,7 +111,20 @@ export default function HeroSection() {
             </div>
 
             <div ref={buttonsRef} className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <Button size="lg" className="text-lg px-8 py-6">
+              <Button 
+                size="lg" 
+                className="text-lg px-8 py-6"
+                onClick={() => {
+                  // Smooth scroll to services section
+                  const servicesSection = document.getElementById('services');
+                  if (servicesSection) {
+                    servicesSection.scrollIntoView({ 
+                      behavior: 'smooth',
+                      block: 'start'
+                    });
+                  }
+                }}
+              >
                 Start Your Journey
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>

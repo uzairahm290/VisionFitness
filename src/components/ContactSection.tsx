@@ -120,23 +120,6 @@ export default function ContactSection() {
         }
       )
 
-      // Form animation
-      gsap.fromTo(formRef.current,
-        { x: -50, opacity: 0 },
-        {
-          x: 0,
-          opacity: 1,
-          duration: 1,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: formRef.current,
-            start: "top 80%",
-            end: "bottom 20%",
-            toggleActions: "play none none reverse"
-          }
-        }
-      )
-
       // Contact info cards animation
       const contactCards = contactInfoRef.current?.querySelectorAll('.contact-card')
       contactCards?.forEach((card, index) => {
@@ -159,31 +142,47 @@ export default function ContactSection() {
         )
       })
 
-      // Membership plans animation
-      const planCards = plansRef.current?.querySelectorAll('.plan-card')
-      planCards?.forEach((card, index) => {
-        gsap.fromTo(card,
-          { y: 40, opacity: 0, scale: 0.95 },
+      // Form animation
+      gsap.fromTo(formRef.current,
+        { x: -50, opacity: 0 },
+        {
+          x: 0,
+          opacity: 1,
+          duration: 1,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: formRef.current,
+            start: "top 80%",
+            end: "bottom 20%",
+            toggleActions: "play none none reverse"
+          }
+        }
+      )
+
+      // Quick Contact section animation
+      const quickContactSection = formRef.current?.nextElementSibling
+      if (quickContactSection) {
+        gsap.fromTo(quickContactSection,
+          { x: 50, opacity: 0 },
           {
-            y: 0,
+            x: 0,
             opacity: 1,
-            scale: 1,
-            duration: 0.7,
+            duration: 1,
             ease: "power2.out",
-            delay: index * 0.2,
+            delay: 0.2,
             scrollTrigger: {
-              trigger: plansRef.current,
+              trigger: quickContactSection,
               start: "top 80%",
               end: "bottom 20%",
               toggleActions: "play none none reverse"
             }
           }
         )
-      })
+      }
 
-      // Plans section animation
+      // Membership plans section animation
       gsap.fromTo(plansRef.current,
-        { y: 30, opacity: 0 },
+        { y: 40, opacity: 0 },
         {
           y: 0,
           opacity: 1,
@@ -198,13 +197,37 @@ export default function ContactSection() {
         }
       )
 
+      // Individual plan cards staggered animation
+      const planCards = plansRef.current?.querySelectorAll('.plan-card')
+      planCards?.forEach((card, index) => {
+        gsap.fromTo(card,
+          { y: 60, opacity: 0, scale: 0.95, rotationY: -15 },
+          {
+            y: 0,
+            opacity: 1,
+            scale: 1,
+            rotationY: 0,
+            duration: 0.8,
+            ease: "power2.out",
+            delay: 0.3 + (index * 0.15),
+            scrollTrigger: {
+              trigger: card,
+              start: "top 85%",
+              end: "bottom 15%",
+              toggleActions: "play none none reverse"
+            }
+          }
+        )
+      })
+
       // Map section animation
       gsap.fromTo(mapRef.current,
-        { y: 30, opacity: 0 },
+        { y: 40, opacity: 0, scale: 0.95 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.8,
+          scale: 1,
+          duration: 1,
           ease: "power2.out",
           scrollTrigger: {
             trigger: mapRef.current,
@@ -214,6 +237,70 @@ export default function ContactSection() {
           }
         }
       )
+
+      // Map iframe animation
+      const mapIframe = mapRef.current?.querySelector('iframe')
+      if (mapIframe) {
+        gsap.fromTo(mapIframe,
+          { scale: 0.9, opacity: 0 },
+          {
+            scale: 1,
+            opacity: 1,
+            duration: 1.2,
+            ease: "power2.out",
+            delay: 0.5,
+            scrollTrigger: {
+              trigger: mapIframe,
+              start: "top 80%",
+              end: "bottom 20%",
+              toggleActions: "play none none reverse"
+            }
+          }
+        )
+      }
+
+      // Location details animation
+      const locationDetails = mapRef.current?.querySelectorAll('.grid.md\\:grid-cols-2 > div')
+      locationDetails?.forEach((detail, index) => {
+        gsap.fromTo(detail,
+          { x: index === 0 ? -30 : 30, opacity: 0 },
+          {
+            x: 0,
+            opacity: 1,
+            duration: 0.8,
+            ease: "power2.out",
+            delay: 0.8 + (index * 0.2),
+            scrollTrigger: {
+              trigger: detail,
+              start: "top 80%",
+              end: "bottom 20%",
+              toggleActions: "play none none reverse"
+            }
+          }
+        )
+      })
+
+      // Action buttons animation
+      const actionButtons = mapRef.current?.querySelectorAll('button')
+      actionButtons?.forEach((button, index) => {
+        gsap.fromTo(button,
+          { y: 20, opacity: 0, scale: 0.9 },
+          {
+            y: 0,
+            opacity: 1,
+            scale: 1,
+            duration: 0.6,
+            ease: "power2.out",
+            delay: 1.2 + (index * 0.1),
+            scrollTrigger: {
+              trigger: button,
+              start: "top 85%",
+              end: "bottom 15%",
+              toggleActions: "play none none reverse"
+            }
+          }
+        )
+      })
 
     }, sectionRef)
 
@@ -466,7 +553,7 @@ export default function ContactSection() {
         </div>
 
         {/* Second Line: Membership Plans */}
-        <div ref={plansRef} className="mb-16">
+        <div ref={plansRef} className="mb-16" data-membership-plans>
           <Card className="shadow-lg">
             <CardHeader>
               <CardTitle className="flex items-center space-x-2">

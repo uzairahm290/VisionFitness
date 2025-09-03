@@ -263,27 +263,6 @@ export default function TestimonialsSection() {
             <div className="text-sm text-muted-foreground">Success Stories</div>
           </div>
         </div>
-
-        {/* CTA Section */}
-        <div className="mt-16 text-center">
-          <div className="bg-gradient-to-r from-primary/10 to-primary/5 rounded-2xl p-8">
-            <h3 className="text-2xl font-bold mb-4">
-              Join Our Success Stories
-            </h3>
-            <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-              Start your fitness journey today and become part of our community 
-              of successful members who have transformed their lives.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-primary text-primary-foreground px-8 py-4 rounded-lg font-semibold hover:bg-primary/90 transition-colors">
-                Start Your Journey
-              </button>
-              <button className="border border-primary text-primary px-8 py-4 rounded-lg font-semibold hover:bg-primary hover:text-primary-foreground transition-colors">
-                Read More Reviews
-              </button>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   )

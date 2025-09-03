@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
 import { 
   Dumbbell, 
   Heart, 
@@ -9,6 +10,8 @@ import {
   Target, 
   Clock, 
   Award,
+  ArrowRight,
+  Calendar,
 } from "lucide-react"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
@@ -164,6 +167,68 @@ export default function ServicesSection() {
               </CardContent>
             </Card>
           ))}
+        </div>
+
+        {/* CTA Section */}
+        <div ref={ctaRef} className="mt-20 text-center space-y-8">
+          <div className="space-y-4">
+            <h3 className="text-2xl sm:text-3xl font-bold tracking-tight">
+              Ready to Start Your{" "}
+              <span className="text-primary">Fitness Journey</span>?
+            </h3>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Choose the service that best fits your needs and take the first step 
+              towards achieving your fitness goals with our expert team.
+            </p>
+          </div>
+          
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button 
+              size="lg" 
+              className="text-lg px-8 py-6"
+              onClick={() => {
+                // Scroll to contact section for booking
+                const contactSection = document.getElementById('contact');
+                if (contactSection) {
+                  contactSection.scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                  });
+                }
+              }}
+            >
+              Book a Session
+              <Calendar className="ml-2 h-5 w-5" />
+            </Button>
+            <Button 
+              size="lg" 
+              variant="outline" 
+              className="text-lg px-8 py-6"
+              onClick={() => {
+                // Scroll to membership plans section in contact page
+                const contactSection = document.getElementById('contact');
+                if (contactSection) {
+                  contactSection.scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                  });
+                  // After scrolling to contact, scroll to membership plans
+                  setTimeout(() => {
+                    const plansSection = contactSection.querySelector('[data-membership-plans]');
+                    if (plansSection) {
+                      plansSection.scrollIntoView({ 
+                        behavior: 'smooth',
+                        block: 'start'
+                      });
+                    }
+                  }, 500);
+                }
+              }}
+            >
+              View Membership Plans
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
+          </div>
         </div>
       </div>
     </section>

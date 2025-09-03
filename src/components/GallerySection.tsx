@@ -42,7 +42,7 @@ export default function GallerySection() {
       id: 4,
       image: "/images/facilities1.jpg",
       title: "Tennis Table",
-      category: "facilites",
+      category: "facilities",
       description: "Extensive cardio equipment for endurance training"
     },
     {
@@ -63,7 +63,7 @@ export default function GallerySection() {
       id: 7,
       image: "/images/snooker.jpg",
       title: "Snooker Table",
-      category: "facilites",
+      category: "facilities",
       description: "Extensive cardio equipment for endurance training"
     },
   ]
