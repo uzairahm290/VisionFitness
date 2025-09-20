@@ -1,69 +1,58 @@
-# React + TypeScript + Vite
+# Vision Fitness 💪
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern fitness center website built with React and Tailwind CSS, hosted on Vercel.
 
-Currently, two official plugins are available:
+## 🏋️ About
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Vision Fitness is a responsive static website built with React and styled with Tailwind CSS to showcase a modern fitness center. The website features an elegant design, smooth animations, and comprehensive information about gym services, membership plans, and facilities.
 
-## Expanding the ESLint configuration
+## ✨ Features
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 🎨 Modern Design
+- Clean and professional UI with Tailwind CSS
+- Responsive design for all devices
+- Smooth animations and transitions
+- Modern utility-first styling approach
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### 📱 Responsive Layout
+- Mobile-first design with Tailwind breakpoints
+- Tablet and desktop optimized layouts
+- Cross-browser compatibility
+- Touch-friendly navigation
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+### 🏢 Business Showcase
+- Service offerings and fitness programs
+- Membership plans and pricing tables
+- Trainer profiles and expertise
+- Facility tours and equipment showcase
+- Class schedules and descriptions
+- Contact forms and location info
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### ⚡ Performance
+- Fast loading static site on Vercel
+- Optimized React components
+- Tailwind CSS purging for minimal bundle size
+- SEO-friendly structure
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🛠️ Tech Stack
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- **Frontend**: React.js, JSX
+- **Styling**: Tailwind CSS
+- **Build Tool**: Vite / Create React App
+- **Deployment**: Vercel
+- **Icons**: Heroicons / React Icons
+- **Routing**: React Router (if multi-page)
+- **Animations**: Tailwind CSS animations + Framer Motion (optional)
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js (v16 or higher)
+- npm or yarn package manager
+
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/uzairahm290/VisionFitness.git
+   cd VisionFitness
